@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/woori3104/Instaclone-BackEnd#readme",
   "dependencies": {
+    "@prisma/client": "^2.21.2",
     "apollo-server": "^2.24.0",
     "graphql": "^15.5.0"
   },

@@ -1,7 +1,7 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-datasource db {
+datasource DB {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
@@ -9,3 +9,12 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+ 
+model Movie {
+  id Int @default(autoincrement()) @id
+  title String
+  year Int
+  genre String?
+  createdAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+ }
