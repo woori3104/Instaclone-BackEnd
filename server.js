@@ -12,7 +12,7 @@ const typeDefs = gql`
         year: Int!
         genre: String
         createdAt: String!
-        updatedAt: String
+        updatedAt: String!
     }
     type Query {
         movies : [Movie]
