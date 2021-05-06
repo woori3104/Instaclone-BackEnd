@@ -9,22 +9,21 @@ export default
         editProfile: async (
         _,
         { 
-            irstName, 
+            firstName, 
             lastName, 
             username, 
             email, 
             password: newPassword
-        }, {token}) => 
+        }, { loggedInUser }) => 
             {
-                
-                const verifiedToken = await jwt.verify(token, process.env.SECRET_KEY);
+                console.log(loggedInUser );
                 let uglyPassword = null;
                 if (newPassword) {
                     uglyPassword = await bcrypt.hash(newPassword, 10);
                 }
                 const { id } = await client.user.update({
                     where: {
-                        id,
+                        id:loggedInUser.id
                     },
                     data: {
                         firstName,
@@ -34,7 +33,7 @@ export default
                         ...(uglyPassword && { password: uglyPassword }),
                     },
                 });
-                if (updatedUser.id) {
+                if (loggedInUser.id) {
                     return {
                     ok: true,
                     };
