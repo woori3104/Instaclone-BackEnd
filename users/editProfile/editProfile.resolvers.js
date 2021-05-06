@@ -13,10 +13,10 @@ export default
             lastName, 
             username, 
             email, 
-            password: newPassword,
-            token
-        }) => 
+            password: newPassword
+        }, {token}) => 
             {
+                
                 const verifiedToken = await jwt.verify(token, process.env.SECRET_KEY);
                 let uglyPassword = null;
                 if (newPassword) {
