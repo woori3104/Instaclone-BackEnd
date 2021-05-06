@@ -1,7 +1,9 @@
 import client from "../../client";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-export default {
+export default 
+{
     Mutation:
     {
         editProfile: async (
@@ -11,36 +13,37 @@ export default {
             lastName, 
             username, 
             email, 
-            password: newPassword 
-        }
-    ) => 
-    {
-        let uglyPassword = null;
-        if (newPassword) {
-            uglyPassword = await bcrypt.hash(newPassword, 10);
-        }
-        const updatedUser = await client.user.update({
-            where: {
-            id: 1,
-            },
-            data: {
-            firstName,
-            lastName,
-            username,
-            email,
-            ...(uglyPassword && { password: uglyPassword }),
-            },
-        });
-        if (updatedUser.id) {
-            return {
-            ok: true,
-            };
-        } else {
-            return {
-            ok: false,
-            error: "Could not update profile.",
-        };
-      }
+            password: newPassword,
+            token
+        }) => 
+            {
+                const verifiedToken = await jwt.verify(token, process.env.SECRET_KEY);
+                let uglyPassword = null;
+                if (newPassword) {
+                    uglyPassword = await bcrypt.hash(newPassword, 10);
+                }
+                const { id } = await client.user.update({
+                    where: {
+                        id,
+                    },
+                    data: {
+                        firstName,
+                        lastName,
+                        username,
+                        email,
+                        ...(uglyPassword && { password: uglyPassword }),
+                    },
+                });
+                if (updatedUser.id) {
+                    return {
+                    ok: true,
+                    };
+                } else {
+                    return {
+                    ok: false,
+                    error: "Could not update profile.",
+                };
+            }
+        },
     },
-  },
 };
