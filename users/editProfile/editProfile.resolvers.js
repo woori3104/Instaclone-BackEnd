@@ -14,9 +14,9 @@ export default
             username, 
             email, 
             password: newPassword
-        }, { loggedInUser }) => 
+        }, { loggedInUser, protectResolver }) => 
             {
-                console.log(loggedInUser );
+                protectResolver(loggedInUser);
                 let uglyPassword = null;
                 if (newPassword) {
                     uglyPassword = await bcrypt.hash(newPassword, 10);
