@@ -7,7 +7,10 @@ const resolverFn = async (
     _,
     { firstName, lastName, username, email, password: newPassword, bio, avatar },
     { loggedInUser }) => {
-    console.log(avatar);
+    const {filename, createReadStream} = await avatar;
+    console.log(filename, createReadStream);
+    const stream = createReadStream();
+    console.log(stream);
     let uglyPassword = null;
     if (newPassword) {
         uglyPassword = await bcrypt.hash(newPassword, 10);
