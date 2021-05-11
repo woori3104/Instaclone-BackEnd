@@ -14,9 +14,9 @@ const resolverFn = async (
         const { filename, createReadStream } = await avatar;
         const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
         const readStream = createReadStream();
-        const writeStream = fs.createWriteStream(process.cwd() + "/uploads/" + newFileName);
+        const writeStream = fs.createWriteStream(process.cwd() + "/uploads/" + newFilename);
         readStream.pipe(writeStream);
-        avatarUrl = `http://locahost:4000//static/${newFileName}`;
+        avatarUrl = `http://locahost:4000//static/${newFilename}`;
     }
 
     let uglyPassword = null;
