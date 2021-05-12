@@ -5,6 +5,11 @@ export default {
           where: {
               userName,
           },
+          // following중인 유저만 표시
+          include: {
+            following: true,
+            followers: true,
+        },
       }),
   },
 };
