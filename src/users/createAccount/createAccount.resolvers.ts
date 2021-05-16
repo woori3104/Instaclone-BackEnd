@@ -1,7 +1,7 @@
-import bcrypt from "bcrypt";
-import client from "../../client";
-import jwt from "jsonwebtoken";
-export default {
+import  * as bcrypt from "bcrypt";
+import { Resolvers } from "../../types";
+
+const resolvers: Resolvers = {
   Mutation: {
     createAccount: async (_, { 
         firstName, 
@@ -9,7 +9,7 @@ export default {
         userName, 
         email,
         password
-    }) => 
+    }, { client }) =>
         {
             try {
 
@@ -46,3 +46,4 @@ export default {
         },
     },
 }
+export default resolvers;

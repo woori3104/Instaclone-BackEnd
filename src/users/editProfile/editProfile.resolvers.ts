@@ -1,14 +1,13 @@
-import fs from "fs";
-import client from "../../client";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import * as fs from "fs";
+import * as bcrypt from "bcrypt";
 import { protectedResolver } from "../users.utils";
+import { Resolvers } from "../../types";
 
 
 const resolverFn = async (
     _,
-    { firstName, lastName, username, email, password: newPassword, bio, avatar },
-    { loggedInUser }) => {
+    { firstName, lastName, userName, email, password: newPassword, bio, avatar },
+    { loggedInUser, client }) => {
     let avatarUrl = null;
     if (avatar) {
         const { filename, createReadStream } = await avatar;
@@ -30,7 +29,7 @@ const resolverFn = async (
         data: {
             firstName,
             lastName,
-            username,
+            userName,
             email,
             bio,
             ...(uglyPassword && { password: uglyPassword }),
@@ -48,8 +47,9 @@ const resolverFn = async (
         };
     }
 };
-export default {
+const resolvers: Resolvers = {
     Mutation: {
         editProfile: protectedResolver(resolverFn),
     },
 };
+export default resolvers;
