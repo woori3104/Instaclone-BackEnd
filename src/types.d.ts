@@ -3,6 +3,7 @@ import { PrismaClient, User, Photo, Hashtag } from "@prisma/client";
 type Context = {
     loggedInUser?: User;
     client: PrismaClient;
+
 };
 
 export type Resolver = (root: any, args: any, context: Context, info: any) => any;
