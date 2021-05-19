@@ -1,18 +1,22 @@
-import { Resolvers } from "../types";
+import client from "../client";
 
-const resolvers: Resolvers = {
+export default {
   Photo: {
-        user: ({ userId }, { client }) => client.user.findUnique({ where: { id: userId } }),
-        hashtags: ({ id }, { client }) =>
+    user: ({ userId }) => {
+      return client.user.findUnique({
+        where: {
+          id: userId,
+        },
+      });
+    },
+    hashtags: ({ id }) =>
       client.hashtag.findMany({
         where: {
           photos: {
-            some: {
-              id,
-            },
+            some: { id },
           },
         },
       }),
   },
-}
-export default resolvers;
+ 
+};
