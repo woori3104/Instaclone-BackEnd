@@ -1,7 +1,7 @@
 import { Resolvers } from "../types";
 const resolvers: Resolvers = {
   User: {
-    totalFollowing: ({ id }, {client}) =>
+    totalFollowing: ({ id }, { client }) =>
       client.user.count({
         where: {
           followers: {
@@ -11,7 +11,7 @@ const resolvers: Resolvers = {
           },
         },
       }),
-    totalFollowers: ({ id }, {client}) =>
+    totalFollowers: ({ id }, { client }) =>
       client.user.count({
         where: {
           following: {
@@ -43,6 +43,7 @@ const resolvers: Resolvers = {
       });
       return Boolean(exists);
     },
+    photos: ({ id }, { client}) => client.user.findUnique({ where: { id } }).photos(),
   },
 };
 export default resolvers;
