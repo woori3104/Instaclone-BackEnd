@@ -7,18 +7,28 @@ export default {
     editPhoto: protectedResolver(
       async (_, { id, caption }, { loggedInUser }) => {
         const oldPhoto = await client.photo.findFirst({
-          where: { id, userId: loggedInUser.id },
+          where: {
+            id,
+            userId: loggedInUser.id,
+          },
           include: {
             hashtags: {
-              select: { hashtag: true },
+              select: {
+                hashtag: true,
+              },
             },
           },
         });
         if (!oldPhoto) {
-          return { ok: false, error: "Photo not found." };
+          return {
+            ok: false,
+            error: "Photo not found.",
+          };
         }
         await client.photo.update({
-          where: { id },
+          where: {
+            id,
+          },
           data: {
             caption,
             hashtags: {
@@ -27,7 +37,9 @@ export default {
             },
           },
         });
-        return { ok: true };
+        return {
+          ok: true,
+        };
       }
     ),
   },
