@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/woori3104/Instaclone-BackEnd#readme",
   "dependencies": {
+    "@paljs/plugins": "^3.3.3",
     "@prisma/client": "^2.21.2",
     "apollo-server": "^2.24.0",
     "apollo-server-express": "^2.24.0",
