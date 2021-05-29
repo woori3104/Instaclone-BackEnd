@@ -40,7 +40,8 @@ Instaclone Backend.
 - [x] S3 Image Upload
 
 ### DMs: 
-- [ ] Create Room
+- [x] See Room
+- [x] Send Message (Create Room)
 - [ ] Get Room
 - [ ] Send Message
 - [ ] Realtime Messages
