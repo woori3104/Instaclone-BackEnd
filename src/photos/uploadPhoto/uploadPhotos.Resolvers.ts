@@ -1,10 +1,12 @@
 import { protectedResolver } from "../../users/users.utils";
 import { Resolvers } from "../../types";
+import { uploadToS3 } from "../../shared/shared.utils";
+import client from "../../client";
 
 const resolvers: Resolvers = {
   Mutation: {
     uploadPhoto: protectedResolver(
-      async (_, { file, caption }, { loggedInUser, client }) => {
+      async (_, { file, caption }, { loggedInUser }) => {
         let hashtagObj = [];
         if (caption) {
           const hashtags = caption.match(/#[\w]+/g);
@@ -13,9 +15,10 @@ const resolvers: Resolvers = {
             create: { hashtag },
           }));
         }
+        const fileUrl = await uploadToS3(file, loggedInUser.id, "uploads");
         return client.photo.create({
           data: {
-            file,
+            file: fileUrl,
             caption,
             user: {
               connect: {
