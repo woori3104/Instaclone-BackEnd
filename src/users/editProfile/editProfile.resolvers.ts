@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as bcrypt from "bcrypt";
 import { protectedResolver } from "../users.utils";
 import { Resolvers } from "../../types";
-
+import { uploadPhoto } from "../../shared/shared.utils";
 
 const resolverFn = async (
     _,
@@ -10,12 +10,16 @@ const resolverFn = async (
     { loggedInUser, client }) => {
     let avatarUrl = null;
     if (avatar) {
-        const { filename, createReadStream } = await avatar;
+        avatarUrl = await uploadPhoto(avatar, loggedInUser.id);
+        /*
+        const { filename, createReadStream } = await avatarURL;
         const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
         const readStream = createReadStream();
-        const writeStream = fs.createWriteStream(process.cwd() + "/uploads/" + newFilename);
+        const writeStream = fs.createWriteStream(process.cwd() + "/uploads/" + newFilename);       
+
         readStream.pipe(writeStream);
-        avatarUrl = `http://locahost:4000//static/${newFilename}`;
+        avatar = `http://locahost:4000//static/${newFilename}`;
+        */
     }
 
     let uglyPassword = null;

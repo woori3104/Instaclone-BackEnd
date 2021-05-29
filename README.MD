@@ -9,8 +9,32 @@ Instaclone Backend.
 - [x] Login
 - [x] Edit Profile
 - [x] Follow User
-- [x]] UnFollow User
+- [x] UnFollow User
 - [x] See Followers w/ Pagination
 - [x] See Following w/ Pagination
-- [ ] Computed Fields
-- [ ] Search Users
+- [x] Computed Fields
+- [x] Search Users
+
+## Photos:
+
+- [x] Upload Photo (Parse #)
+- [x] See Photo
+- [x] See Hashtag
+- [x] Search Photos
+- [x] Edit Photo
+- [x] Like / Unlike Photo
+- [x] See Photo Likes
+- [x] See Feed
+- [x] See Photo Comments
+- [x] Delete Photo
+
+## Comments:
+- [x] Comment on Photo
+- [x] Delete Comment
+- [x] Edit Comment
+
+## Refactor:
+- [x] Mutation Responses
+
+## Extras
+- [x] S3 Image Upload

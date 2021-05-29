@@ -1,4 +1,4 @@
-import { PrismaClient, User, Photo, Hashtag } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 
 type Context = {
     loggedInUser?: User;
